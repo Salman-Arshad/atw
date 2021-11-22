@@ -1,6 +1,8 @@
 #!/bin/node
 const Arweave = require("arweave");
 var player = require("play-sound")((opts = {}));
+path = require("path");
+fs = require("fs");
 
 arweave = Arweave.init({
   host: "arweave.net",
@@ -11,7 +13,7 @@ arweave = Arweave.init({
 async function main() {
   let txId = process.argv[2];
   await watchTx(txId);
-  player.play("tone.wav", function (err) {
+  player.play(path.resolve(__dirname, 'tone.wav'), function (err) {
     if (err) throw err;
   });
   console.log("Your transaction with Id " + txId + " is Mined successfully!!");
